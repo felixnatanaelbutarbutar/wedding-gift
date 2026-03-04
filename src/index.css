@@ -1,0 +1,344 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Wedding Gift palette */
+  --wg-ivory: #fbf7f0;
+  --wg-ivory-2: #fffdf8;
+  --wg-blush: #f6c3cf;
+  --wg-blush-2: #fbe3e9;
+  --wg-sage: #9bb7a5;
+  --wg-sage-2: #e7f0ea;
+  --wg-ink: #1c1a1f;
+  --wg-muted: #5e5a64;
+  --wg-gold: #c7a057;
+  --wg-gold-2: #e7d2a2;
+  --wg-border: rgba(199, 160, 87, 0.28);
+  --wg-shadow: 0 24px 60px rgba(28, 26, 31, 0.14);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  scroll-behavior: smooth;
+  background:
+    radial-gradient(1000px 800px at 15% 10%, rgba(246, 195, 207, 0.45), transparent 55%),
+    radial-gradient(1100px 900px at 85% 20%, rgba(155, 183, 165, 0.35), transparent 60%),
+    linear-gradient(180deg, var(--wg-ivory), var(--wg-ivory-2));
+  color: var(--wg-ink);
+}
+
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Premium typography helpers */
+.wg-serif {
+  font-family: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+.wg-app {
+  min-height: 100svh;
+  width: 100%;
+  color: var(--wg-ink);
+}
+
+.wg-surface {
+  background: rgba(255, 253, 248, 0.78);
+  border: 1px solid var(--wg-border);
+  box-shadow: var(--wg-shadow);
+  backdrop-filter: blur(10px);
+}
+
+.wg-card {
+  background: rgba(255, 253, 248, 0.9);
+  border: 1px solid var(--wg-border);
+  border-radius: 18px;
+  box-shadow: var(--wg-shadow);
+}
+
+.wg-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(199, 160, 87, 0.55), transparent);
+}
+
+.wg-gold-text {
+  color: var(--wg-gold);
+}
+
+.wg-muted {
+  color: var(--wg-muted);
+}
+
+.wg-button {
+  border-radius: 999px;
+  border: 1px solid rgba(199, 160, 87, 0.45);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.35)),
+    linear-gradient(90deg, rgba(246, 195, 207, 0.85), rgba(155, 183, 165, 0.55));
+  color: var(--wg-ink);
+  box-shadow: 0 16px 28px rgba(199, 160, 87, 0.18);
+  transition: transform 150ms ease, box-shadow 150ms ease, filter 150ms ease;
+}
+
+.wg-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 20px 36px rgba(199, 160, 87, 0.22);
+  filter: saturate(1.05);
+}
+
+.wg-button:active {
+  transform: translateY(0px) scale(0.99);
+}
+
+/* 1. Jiggle Animation */
+@keyframes jiggle {
+
+  0%,
+  100% {
+    transform: rotate(-3deg) scale(1);
+  }
+
+  50% {
+    transform: rotate(3deg) scale(1.1);
+  }
+}
+
+.animate-jiggle {
+  animation: jiggle 0.3s infinite;
+}
+
+/* 2. Glitch Animation */
+@keyframes glitch-anim {
+  0% {
+    transform: translate(0);
+    background-color: white;
+    filter: invert(0);
+  }
+
+  20% {
+    transform: translate(-10px, 10px);
+    background-color: black;
+    filter: invert(1);
+  }
+
+  40% {
+    transform: translate(-10px, -10px);
+    background-color: red;
+    filter: invert(0.5);
+  }
+
+  60% {
+    transform: translate(10px, 10px);
+    background-color: blue;
+    filter: invert(0.8);
+  }
+
+  80% {
+    transform: translate(10px, -10px);
+    background-color: green;
+    filter: invert(0.2);
+  }
+
+  100% {
+    transform: translate(0);
+    background-color: transparent;
+    filter: invert(0);
+  }
+}
+
+/* 3. True Masonry Layout using CSS Columns to prevent cropping */
+.masonry-grid {
+  column-count: 2;
+  column-gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .masonry-grid {
+    column-count: 3;
+    column-gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid {
+    column-count: 4;
+    column-gap: 2rem;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+  display: inline-block;
+  width: 100%;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.masonry-item:nth-child(odd) {
+  transform: rotate(-3deg);
+}
+
+.masonry-item:nth-child(even) {
+  transform: rotate(3deg) translateY(5px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .masonry-item:hover {
+    transform: scale(1.1) rotate(5deg) !important;
+    z-index: 50;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.masonry-item:active {
+  transform: scale(1.05) rotate(-5deg) !important;
+  z-index: 50;
+}
+
+/* 4. Hide scrollbar for carousel */
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-container {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* 5. Meme text stroke */
+.text-stroke {
+  -webkit-text-stroke: 1px rgba(28, 26, 31, 0.28);
+  color: var(--wg-gold);
+}
+
+@media (min-width: 768px) {
+  .text-stroke {
+    -webkit-text-stroke: 2px rgba(28, 26, 31, 0.28);
+  }
+}
+
+/* 6. Scanlines Overlay for Alay Section */
+.scanlines {
+  background: linear-gradient(to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0) 50%,
+      rgba(0, 0, 0, 0.1) 50%,
+      rgba(0, 0, 0, 0.1));
+  background-size: 100% 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* 7. RGB Split text effect */
+.rgb-split {
+  text-shadow:
+    0 10px 30px rgba(28, 26, 31, 0.18),
+    0 1px 0 rgba(231, 210, 162, 0.7);
+}
+
+/* 8. Rainbow Background Animation */
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-rainbow {
+  /* Kept for compatibility, softened for wedding palette */
+  background: linear-gradient(270deg, var(--wg-blush-2), var(--wg-ivory), var(--wg-sage-2), var(--wg-ivory));
+  background-size: 1400% 1400%;
+  animation: rainbow 10s ease infinite;
+}
+
+/* 9. Wavy Text Animation */
+@keyframes wave-text {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.wave-span {
+  display: inline-block;
+  animation: wave-text 1s infinite ease-in-out;
+}
+
+.wave-span:nth-child(1) {
+  animation-delay: 0.0s;
+}
+
+.wave-span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.wave-span:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.wave-span:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.wave-span:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.wave-span:nth-child(6) {
+  animation-delay: 0.5s;
+}
+
+.wave-span:nth-child(7) {
+  animation-delay: 0.6s;
+}
+
+.wave-span:nth-child(8) {
+  animation-delay: 0.7s;
+}
+
+/* 10. Shimmer effect */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer-bg {
+  background: linear-gradient(to right, #ffffff00 4%, #ffffff80 25%, #ffffff00 36%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
